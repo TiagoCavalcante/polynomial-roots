@@ -5,7 +5,7 @@ pub fn variations(
   polynomial: &crate::polynomials::Polynomial,
 ) -> i32 {
   let mut v: i32 = 0;
-  if let Some(mut old) = polynomial.front() {
+  if let Some(mut old) = polynomial.first() {
     for coefficient in polynomial.iter().skip(1) {
       // We don't compare if it is 0 because 0 doesn't count
       // as a change in sign, but 0 between 2 opposite signs
@@ -32,7 +32,7 @@ pub fn negative_variations(
   polynomial: &crate::polynomials::Polynomial,
 ) -> i32 {
   let mut v: i32 = 0;
-  if let Some(first) = polynomial.front() {
+  if let Some(first) = polynomial.first() {
     // The first coefficient doesn't not multiplies an x
     // power, and so should be negated, otherwise we should
     // negate all x powers, and that'd be slower.
@@ -63,7 +63,7 @@ pub fn negative_variations(
 fn biggest_non_last_coefficient(
   polynomial: &crate::polynomials::Polynomial,
 ) -> f32 {
-  if let Some(first) = polynomial.front() {
+  if let Some(first) = polynomial.first() {
     let mut biggest = first.abs();
 
     // Iterate over all but the last coefficients.
@@ -84,7 +84,7 @@ fn biggest_non_last_coefficient(
 pub fn bound(
   polynomial: &crate::polynomials::Polynomial,
 ) -> Option<f32> {
-  if let Some(last) = polynomial.back() {
+  if let Some(last) = polynomial.last() {
     return Some(
       (1.0
         + biggest_non_last_coefficient(polynomial) / last)

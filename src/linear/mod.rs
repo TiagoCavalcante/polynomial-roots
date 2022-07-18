@@ -7,7 +7,7 @@ pub fn get_roots(
   has_zero: bool,
 ) -> Vec<f32> {
   if let (Some(a), Some(b)) =
-    (polynomial.back(), polynomial.front())
+    (polynomial.last(), polynomial.first())
   {
     let root = -b / a;
 

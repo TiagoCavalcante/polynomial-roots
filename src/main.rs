@@ -45,7 +45,7 @@ fn main() {
   //   => x¹ (cₙ xⁿ⁻¹ + ··· + c₁ x⁰) = -c₀
   //   => 0 = -c₀
   //   => c₀ = 0
-  let has_zero = if let Some(first) = polynomial.front() {
+  let has_zero = if let Some(first) = polynomial.first() {
     math::is_zero(*first)
   } else {
     false

@@ -13,14 +13,14 @@ impl Polynomial {
   /// the right and the left.
   /// For example: 0 + 0 x¹ + 1 x² + 0 x³ becomes 1.
   pub fn simplify(&mut self) {
-    while let Some(coefficient) = self.front() {
+    while let Some(coefficient) = self.first() {
       // If it isn't 0 we shoudn't remove it.
       if !crate::math::is_zero(*coefficient) {
         break;
       }
       self.coefficients.pop_front();
     }
-    while let Some(coefficient) = self.back() {
+    while let Some(coefficient) = self.last() {
       if !crate::math::is_zero(*coefficient) {
         break;
       }
@@ -51,10 +51,10 @@ impl Polynomial {
   ) -> std::collections::linked_list::Iter<'_, f32> {
     return self.coefficients.iter();
   }
-  pub fn front(&self) -> Option<&f32> {
+  pub fn first(&self) -> Option<&f32> {
     return self.coefficients.front();
   }
-  pub fn back(&self) -> Option<&f32> {
+  pub fn last(&self) -> Option<&f32> {
     return self.coefficients.back();
   }
 }
