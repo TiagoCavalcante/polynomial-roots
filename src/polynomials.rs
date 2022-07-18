@@ -3,6 +3,7 @@ pub struct Polynomial {
 }
 
 impl Polynomial {
+  /// Create a new polynomial.
   pub fn new(
     coefficients: std::collections::LinkedList<f32>,
   ) -> Polynomial {
