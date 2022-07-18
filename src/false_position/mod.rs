@@ -19,8 +19,8 @@ fn false_position(
   a: f32,
   b: f32,
 ) -> f32 {
-  let fa = polynomial.get_value_at_x(a);
-  let fb = polynomial.get_value_at_x(b);
+  let fa = polynomial.get_value_at(a);
+  let fb = polynomial.get_value_at(b);
   return (a * fb - b * fa) / (fb - fa);
 }
 
@@ -36,8 +36,8 @@ fn get_root(
   let mut x = false_position(polynomial, a, b);
 
   for _ in 0..crate::constants::ITERATIONS {
-    if polynomial.get_value_at_x(x) < 0.0
-      && polynomial.get_value_at_x(b) > 0.0
+    if polynomial.get_value_at(x) < 0.0
+      && polynomial.get_value_at(b) > 0.0
     {
       a = x;
     } else {
@@ -68,14 +68,13 @@ fn get_roots_in_interval(
 
     // If one value is bellow the y=0 line and the other
     // value is over it, certainly it crossed the y=0 line.
-    if sign(polynomial.get_value_at_x(current))
-      != sign(polynomial.get_value_at_x(i))
+    if sign(polynomial.get_value_at(current))
+      != sign(polynomial.get_value_at(i))
     {
       let x = get_root(polynomial, current, i);
 
       // Check if x really is a root.
-      if crate::math::is_zero(polynomial.get_value_at_x(x))
-      {
+      if crate::math::is_zero(polynomial.get_value_at(x)) {
         roots.push(x);
         remaining_roots -= 1;
 

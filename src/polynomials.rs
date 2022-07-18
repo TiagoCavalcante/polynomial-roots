@@ -24,7 +24,7 @@ impl Polynomial {
   }
 
   /// Evaluate p(x).
-  pub fn get_value_at_x(&self, x: f32) -> f32 {
+  pub fn get_value_at(&self, x: f32) -> f32 {
     let mut result: f32 = 0.0;
     let mut x_pow: f32 = 1.0;
 
