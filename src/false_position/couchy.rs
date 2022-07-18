@@ -72,6 +72,7 @@ fn biggest_non_last_coefficient(
         biggest = coefficient.abs();
       }
     }
+
     return biggest;
   } else {
     return 0.0;
@@ -84,13 +85,12 @@ fn biggest_non_last_coefficient(
 pub fn bound(
   polynomial: &crate::polynomials::Polynomial,
 ) -> Option<f32> {
-  if let Some(last) = polynomial.last() {
-    return Some(
+  match polynomial.last() {
+    Some(last) => Some(
       (1.0
         + biggest_non_last_coefficient(polynomial) / last)
         .abs(),
-    );
-  } else {
-    return None;
+    ),
+    _ => None,
   }
 }

@@ -45,22 +45,18 @@ fn main() {
   //   => x¹ (cₙ xⁿ⁻¹ + ··· + c₁ x⁰) = -c₀
   //   => 0 = -c₀
   //   => c₀ = 0
-  let has_zero = if let Some(first) = polynomial.first() {
-    math::is_zero(*first)
-  } else {
-    false
+  let has_zero = match polynomial.first() {
+    Some(first) => math::is_zero(*first),
+    _ => false,
   };
 
   polynomial.simplify();
 
-  let roots = if polynomial.len() == 2 {
-    linear::get_roots(&polynomial, has_zero)
-  } else if polynomial.len() == 3 {
-    quadratic::get_roots(&polynomial, has_zero)
-  } else if polynomial.len() > 3 {
-    false_position::get_roots(&polynomial, has_zero)
-  } else {
-    Vec::<f32>::new()
+  let roots = match polynomial.len() {
+    0 | 1 => Vec::<f32>::new(),
+    2 => linear::get_roots(&polynomial, has_zero),
+    3 => quadratic::get_roots(&polynomial, has_zero),
+    _ => false_position::get_roots(&polynomial, has_zero),
   };
 
   // Print the roots.
