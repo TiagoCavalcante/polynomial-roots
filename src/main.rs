@@ -27,12 +27,12 @@ fn main() {
     }
   }
 
-  let mut polynomial = polynomials::Polynomial {
-    linked_list: buffer
+  let mut polynomial = polynomials::Polynomial::new(
+    buffer
       .split_whitespace()
       .map(|s| s.parse().unwrap())
       .collect(),
-  };
+  );
 
   // We may "loose" the root 0 when simplifying the
   // polynomial, e.g.:

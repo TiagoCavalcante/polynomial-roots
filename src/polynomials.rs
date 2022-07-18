@@ -1,8 +1,14 @@
 pub struct Polynomial {
-  pub linked_list: std::collections::LinkedList<f32>,
+  coefficients: std::collections::LinkedList<f32>,
 }
 
 impl Polynomial {
+  pub fn new(
+    coefficients: std::collections::LinkedList<f32>,
+  ) -> Polynomial {
+    return Polynomial { coefficients };
+  }
+
   /// Remove the leading zeros of the polynomial, both from
   /// the right and the left.
   /// For example: 0 + 0 x¹ + 1 x² + 0 x³ becomes 1.
@@ -12,14 +18,14 @@ impl Polynomial {
       if !crate::math::is_zero(*coefficient) {
         break;
       }
-      self.linked_list.pop_front();
+      self.coefficients.pop_front();
     }
     while let Some(coefficient) = self.back() {
       if !crate::math::is_zero(*coefficient) {
         break;
       }
 
-      self.linked_list.pop_back();
+      self.coefficients.pop_back();
     }
   }
 
@@ -28,7 +34,7 @@ impl Polynomial {
     let mut result: f32 = 0.0;
     let mut x_pow: f32 = 1.0;
 
-    for coefficient in &self.linked_list {
+    for coefficient in &self.coefficients {
       result += coefficient * x_pow;
       x_pow *= x;
     }
@@ -38,17 +44,17 @@ impl Polynomial {
 
   // Expose functions of self.linked_list.
   pub fn len(&self) -> usize {
-    return self.linked_list.len();
+    return self.coefficients.len();
   }
   pub fn iter(
     &self,
   ) -> std::collections::linked_list::Iter<'_, f32> {
-    return self.linked_list.iter();
+    return self.coefficients.iter();
   }
   pub fn front(&self) -> Option<&f32> {
-    return self.linked_list.front();
+    return self.coefficients.front();
   }
   pub fn back(&self) -> Option<&f32> {
-    return self.linked_list.back();
+    return self.coefficients.back();
   }
 }
