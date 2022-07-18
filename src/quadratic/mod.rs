@@ -1,3 +1,8 @@
+/// Returns a vector with the real roots of the polynomial
+/// obtained with the quadratic formula.
+/// Δ = b² - 4 a c
+/// x = (-b ± √Δ) / (2 a)
+/// The roots are in increasing order.
 pub fn get_roots(
   polynomial: &crate::polynomials::Polynomial,
   has_zero: bool,

@@ -1,5 +1,6 @@
-// Variations of signs of the polynomial p(x), it is the
-// maximum number of positive roots.
+/// Variations of signs of the polynomial p(x), it is the
+/// maximum number of positive roots.
+/// This is the maximum number of positive roots of p(x).
 pub fn variations(
   polynomial: &crate::polynomials::Polynomial,
 ) -> i32 {
@@ -24,8 +25,9 @@ pub fn variations(
   return v;
 }
 
-// Variations of signs of the polynomial p(-x), it is the
-// maximum number of negative roots.
+/// Variations of signs of the polynomial p(-x), it is the
+/// maximum number of negative roots.
+/// This is the maximum number of negative roots of p(x).
 pub fn negative_variations(
   polynomial: &crate::polynomials::Polynomial,
 ) -> i32 {
@@ -55,9 +57,10 @@ pub fn negative_variations(
   return v;
 }
 
-// Biggest in terms of modulo, the last coefficient is the
-// one that accompanies the term a^n.
-pub fn biggest_non_last_coefficient(
+/// Returns the biggest (in terms of modulo) non-last
+/// coefficient (the last coefficient is the one that
+/// accompanies the term a^n).
+fn biggest_non_last_coefficient(
   polynomial: &crate::polynomials::Polynomial,
 ) -> f32 {
   if let Some(first) = polynomial.front() {
@@ -75,10 +78,12 @@ pub fn biggest_non_last_coefficient(
   }
 }
 
+/// Returns the modulo of the Cauchy's bound.
+/// All the negative roots are between -bound and 0.
+/// All the positive roots are between 0 and bound.
 pub fn bound(
   polynomial: &crate::polynomials::Polynomial,
 ) -> Option<f32> {
-  // Cauchy's bound.
   if let Some(last) = polynomial.back() {
     return Some(
       (1.0

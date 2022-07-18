@@ -1,3 +1,7 @@
+/// Returns a vector with the real roots of the polynomial
+/// obtained with the linear formula.
+/// x = -b / a
+/// The roots are in increasing order.
 pub fn get_roots(
   polynomial: &crate::polynomials::Polynomial,
   has_zero: bool,

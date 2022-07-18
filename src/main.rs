@@ -1,3 +1,5 @@
+//! Blazingly fast polynomial root finder
+
 mod constants;
 mod false_position;
 mod linear;
@@ -5,6 +7,16 @@ mod math;
 mod polynomials;
 mod quadratic;
 
+/// Get the coefficients of the polynomial in exponent
+/// increasing order and print the roots of the polynomial,
+/// for example:
+/// ```sh
+/// sh$ ./target/release/polynomials
+/// 0 1 2 1
+/// { -1; 0; }
+/// ```
+/// This function will write an error and exit with status
+/// code 1 if it can't read from stdin.
 fn main() {
   let mut buffer = String::new();
   match std::io::stdin().read_line(&mut buffer) {

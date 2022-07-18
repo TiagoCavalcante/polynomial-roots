@@ -1,5 +1,6 @@
 mod couchy;
 
+/// Returns -1 if x < 0, 1 if x > 0, 0 otherwise.
 fn sign(x: f32) -> i32 {
   if x < 0.0 {
     return -1;
@@ -10,7 +11,9 @@ fn sign(x: f32) -> i32 {
   }
 }
 
-// Get x0 with the false position method
+/// Get x₀ in false position method.
+/// x₀ = [a f(b) - b f(a)] / [f(a) - f(b)]
+/// This is also know as regula falsi method.
 fn false_position(
   polynomial: &crate::polynomials::Polynomial,
   a: f32,
@@ -21,6 +24,8 @@ fn false_position(
   return (a * fb - b * fa) / (fb - fa);
 }
 
+/// Get a root in the interval [a, b] using the false
+/// postion method.
 fn get_root(
   polynomial: &crate::polynomials::Polynomial,
   a: f32,
@@ -45,6 +50,9 @@ fn get_root(
   return x;
 }
 
+/// Gets all the roots in the iterval [a, b].
+/// The function returns when the interval was traveled or
+/// the maximum number of roots is reached.
 fn get_roots_in_interval(
   roots: &mut Vec<f32>,
   polynomial: &crate::polynomials::Polynomial,
@@ -79,6 +87,9 @@ fn get_roots_in_interval(
   }
 }
 
+/// Returns a vector with the real roots of the polynomial
+/// obtained with the false position method.
+/// The roots are in increasing order.
 pub fn get_roots(
   polynomial: &crate::polynomials::Polynomial,
   has_zero: bool,

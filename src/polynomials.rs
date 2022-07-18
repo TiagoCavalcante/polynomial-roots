@@ -3,8 +3,12 @@ pub struct Polynomial {
 }
 
 impl Polynomial {
+  /// Remove the leading zeros of the polynomial, both from
+  /// the right and the left.
+  /// For example: 0 + 0 x¹ + 1 x² + 0 x³ becomes 1.
   pub fn simplify(&mut self) {
     while let Some(coefficient) = self.front() {
+      // If it isn't 0 we shoudn't remove it.
       if !crate::math::is_zero(*coefficient) {
         break;
       }
@@ -19,6 +23,7 @@ impl Polynomial {
     }
   }
 
+  /// Evaluate p(x).
   pub fn get_value_at_x(&self, x: f32) -> f32 {
     let mut result: f32 = 0.0;
     let mut x_pow: f32 = 1.0;
