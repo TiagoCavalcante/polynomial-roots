@@ -11,7 +11,7 @@ mod quadratic;
 /// increasing order and print the roots of the polynomial,
 /// for example:
 /// ```sh
-/// sh$ ./target/release/polynomials
+/// sh$ ./target/release/polynomial-roots
 /// 0 1 2 1
 /// { -1; 0; }
 /// ```
