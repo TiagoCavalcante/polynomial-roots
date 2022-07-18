@@ -7,10 +7,13 @@ pub fn get_roots(
   polynomial: &crate::polynomials::Polynomial,
   has_zero: bool,
 ) -> Vec<f32> {
-  if let (Some(a), Some(b), Some(c)) = (
-    polynomial.back(),
-    polynomial.iter().nth(1),
-    polynomial.front(),
+  let mut polynomial_iter = polynomial.iter();
+  // The coefficients are in exponent increasing order, so
+  // instead of a x² + b x + c we have c + b x + a x².
+  if let (Some(c), Some(b), Some(a)) = (
+    polynomial_iter.next(),
+    polynomial_iter.next(),
+    polynomial_iter.next(),
   ) {
     let delta = b * b - 4.0 * a * c;
 
