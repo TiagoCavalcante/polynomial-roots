@@ -63,20 +63,19 @@ pub fn negative_variations(
 fn biggest_non_last_coefficient(
   polynomial: &crate::polynomials::Polynomial,
 ) -> f32 {
-  if let Some(first) = polynomial.first() {
-    let mut biggest = first.abs();
-
-    // Iterate over all but the last coefficients.
-    for coefficient in polynomial.iter().rev().skip(1) {
-      if coefficient.abs() > biggest {
-        biggest = coefficient.abs();
-      }
-    }
-
-    return biggest;
-  } else {
-    return 0.0;
-  }
+  polynomial
+    // Get the coefficients.
+    .iter()
+    // Reverse the order of the coefficients.
+    .rev()
+    // Skip the first (last if it wasn't reversed) coefficient.
+    .skip(1)
+    // Takes the modulo of each coefficient.
+    .map(|c| c.abs())
+    // Gets the maximum value.
+    .reduce(f32::max)
+    // If everything is ok return the result, otherwise return 0.0.
+    .unwrap_or(0.0)
 }
 
 /// Returns the modulo of the Cauchy's bound.
