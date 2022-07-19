@@ -30,6 +30,7 @@ fn main() {
   let mut polynomial = polynomials::Polynomial::new(
     buffer
       .split_whitespace()
+      // Remove non-number parts.
       .filter_map(|s| s.parse().ok())
       .collect(),
   );

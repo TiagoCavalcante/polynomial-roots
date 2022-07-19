@@ -2,12 +2,10 @@ mod couchy;
 
 /// Returns -1 if x < 0, 1 if x > 0, 0 otherwise.
 fn sign(x: f32) -> i32 {
-  if x < 0.0 {
-    return -1;
-  } else if x > 0.0 {
-    return 1;
-  } else {
-    return 0;
+  match x {
+    _ if x < 0.0 => -1,
+    _ if x > 0.0 => 1,
+    _ => 0,
   }
 }
 
