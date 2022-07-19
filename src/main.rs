@@ -47,7 +47,7 @@ fn main() {
   //   => c₀ = 0
   let has_zero = match polynomial.first() {
     Some(first) => math::is_zero(*first),
-    _ => false,
+    None => false,
   };
 
   polynomial.simplify();

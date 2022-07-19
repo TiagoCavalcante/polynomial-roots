@@ -91,6 +91,6 @@ pub fn bound(
         + biggest_non_last_coefficient(polynomial) / last)
         .abs(),
     ),
-    _ => None,
+    None => None,
   }
 }
