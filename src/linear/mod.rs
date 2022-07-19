@@ -25,3 +25,28 @@ pub fn get_roots(
     return vec![];
   }
 }
+
+#[cfg(test)]
+mod tests {
+  #[test]
+  fn polynomial_with_one_root() {
+    let polynomial = crate::polynomials::Polynomial::new(
+      std::collections::LinkedList::from([1.0, 2.0]),
+    );
+    assert_eq!(
+      crate::linear::get_roots(&polynomial, false),
+      vec![-0.5],
+    );
+  }
+
+  #[test]
+  fn polynomial_with_two_roots() {
+    let polynomial = crate::polynomials::Polynomial::new(
+      std::collections::LinkedList::from([-2.0, 1.0]),
+    );
+    assert_eq!(
+      crate::linear::get_roots(&polynomial, true),
+      vec![0.0, 2.0],
+    );
+  }
+}
