@@ -53,7 +53,13 @@ fn main() {
   polynomial.simplify();
 
   let roots = match polynomial.len() {
-    0 | 1 => Vec::<f32>::new(),
+    0 | 1 => {
+      if has_zero {
+        vec![0.0]
+      } else {
+        vec![]
+      }
+    }
     2 => linear::get_roots(&polynomial, has_zero),
     3 => quadratic::get_roots(&polynomial, has_zero),
     _ => false_position::get_roots(&polynomial, has_zero),
