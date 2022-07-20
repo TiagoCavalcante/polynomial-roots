@@ -58,3 +58,20 @@ impl Polynomial {
     return self.coefficients.back();
   }
 }
+
+#[cfg(test)]
+mod tests {
+  #[test]
+  fn create_polynomial() {
+    assert_eq!(
+      crate::polynomials::Polynomial {
+        coefficients: std::collections::LinkedList::new()
+      }
+      .coefficients,
+      crate::polynomials::Polynomial::new(
+        std::collections::LinkedList::new()
+      )
+      .coefficients
+    );
+  }
+}
