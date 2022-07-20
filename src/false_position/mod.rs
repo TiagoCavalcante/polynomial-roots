@@ -1,6 +1,7 @@
 mod couchy;
 
 /// Returns -1 if x < 0, 1 if x > 0, 0 otherwise.
+#[inline]
 fn sign(x: f32) -> i32 {
   match x {
     _ if x < 0.0 => -1,
@@ -58,18 +59,18 @@ fn get_roots_in_interval(
   b: f32,
   remaining_roots: i32,
 ) {
-  let mut i = a;
+  let mut current = a;
   let mut remaining_roots = remaining_roots;
-  while i < b {
-    let current = i;
-    i += crate::constants::PARTITION_SIZE;
+  while current < b {
+    let old = current;
+    current += crate::constants::PARTITION_SIZE;
 
     // If one value is bellow the y=0 line and the other
     // value is over it, certainly it crossed the y=0 line.
-    if sign(polynomial.get_value_at(current))
-      != sign(polynomial.get_value_at(i))
+    if sign(polynomial.get_value_at(old))
+      != sign(polynomial.get_value_at(current))
     {
-      let x = get_root(polynomial, current, i);
+      let x = get_root(polynomial, old, current);
 
       // Check if x really is a root.
       if crate::math::is_zero(polynomial.get_value_at(x)) {

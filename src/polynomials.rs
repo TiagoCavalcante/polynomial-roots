@@ -25,7 +25,6 @@ impl Polynomial {
       if !crate::math::is_zero(*coefficient) {
         break;
       }
-
       self.coefficients.pop_back();
     }
   }
