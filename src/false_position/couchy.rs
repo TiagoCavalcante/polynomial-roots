@@ -6,21 +6,26 @@ pub fn variations(
 ) -> i32 {
   let mut v: i32 = 0;
   if let Some(mut old) = polynomial.first() {
-    for coefficient in polynomial.iter().skip(1) {
+    polynomial
+      .iter()
+      // We already assigned the first to old.
+      .skip(1)
       // We don't compare if it is 0 because 0 doesn't count
       // as a change in sign, but 0 between 2 opposite signs
       // still counts as a change in sign (+a, 0, -a), so we
       // shouldn't assign to old  when the coefficient is 0,
       // so none of the code bellow should be executed.
-      if !crate::math::is_zero(*coefficient) {
+      .filter(|coefficient| {
+        !crate::math::is_zero(**coefficient)
+      })
+      .for_each(|coefficient| {
         if (*coefficient < 0.0 && *old > 0.0)
           || (*coefficient > 0.0 && *old < 0.0)
         {
           v += 1;
         }
         old = coefficient;
-      }
-    }
+      });
   }
   return v;
 }
@@ -37,8 +42,14 @@ pub fn negative_variations(
     // power, and so should be negated, otherwise we should
     // negate all x powers, and that'd be slower.
     let mut old = -first;
-    for coefficient in polynomial.iter().skip(1) {
-      if !crate::math::is_zero(*coefficient) {
+
+    polynomial
+      .iter()
+      .skip(1)
+      .filter(|coefficient| {
+        !crate::math::is_zero(**coefficient)
+      })
+      .for_each(|coefficient| {
         // If i is odd.
         // (-k)^n, where k is a positive number is -k, so
         // instead of checking if the signs are opposite we
@@ -51,8 +62,7 @@ pub fn negative_variations(
           v += 1;
         }
         old = *coefficient;
-      }
-    }
+      });
   }
   return v;
 }
