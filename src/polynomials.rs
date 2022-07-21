@@ -63,15 +63,39 @@ impl Polynomial {
 mod tests {
   #[test]
   fn create_polynomial() {
-    assert_eq!(
-      crate::polynomials::Polynomial {
-        coefficients: std::collections::LinkedList::new()
-      }
-      .coefficients,
-      crate::polynomials::Polynomial::new(
-        std::collections::LinkedList::new()
-      )
-      .coefficients
+    let linked_list =
+      std::collections::LinkedList::<f32>::new();
+
+    let polynomial_1 = crate::polynomials::Polynomial {
+      coefficients: linked_list.clone(),
+    };
+    let polynomial_2 = crate::polynomials::Polynomial::new(
+      linked_list.clone(),
     );
+
+    assert_eq!(
+      polynomial_1.coefficients,
+      polynomial_2.coefficients
+    );
+  }
+
+  #[test]
+  fn evaluate_polynomial() {
+    let linked_list =
+      // c = 1, b = 2, a = -3
+      // a x² + b x + c
+      std::collections::LinkedList::from([1.0, 2.0, -3.0]);
+
+    let polynomial = crate::polynomials::Polynomial {
+      coefficients: linked_list,
+    };
+
+    assert!(crate::math::is_zero(
+      //    p(x) - y = 0
+      // => p(x) = y
+      // We check if this is 0 instead of checking if both
+      // are equal because of floating point errors.
+      polynomial.get_value_at(-1.0) + 4.0
+    ))
   }
 }
