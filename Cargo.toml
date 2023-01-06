@@ -2,3 +2,5 @@
 name = "polynomial-roots"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
+description = "Find the real roots of huge polynomials in milliseconds"
