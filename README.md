@@ -13,7 +13,8 @@ cargo build --release
 The coefficients are in degree-ascending order, that is: $x^0 + x^1 + x^2 + x^3 + \cdots$  
 The coefficients are passed space-separated, therefore to solve the polynomial $3 - 9x + x^3$ you need to run the program the following way:
 ```sh
-$ ./target/release/polynomial-roots
+$ cargo install polynomial-roots
+$ polynomial-roots
 3 -9 0 1
 { -3.154523; 0.33760893; 2.816914; }
 ```
