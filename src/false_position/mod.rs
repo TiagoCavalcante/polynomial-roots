@@ -24,7 +24,7 @@ fn false_position(
 }
 
 /// Get a root in the interval [a, b] using the false
-/// postion method.
+/// position method.
 fn get_root(
   polynomial: &crate::polynomials::Polynomial,
   a: f32,
@@ -49,7 +49,7 @@ fn get_root(
   return x;
 }
 
-/// Gets all the roots in the iterval [a, b].
+/// Gets all the roots in the interval [a, b].
 /// The function returns when the interval was traveled or
 /// the maximum number of roots is reached.
 fn get_roots_in_interval(

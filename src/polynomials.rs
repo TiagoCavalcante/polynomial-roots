@@ -15,7 +15,7 @@ impl Polynomial {
   /// For example: 0 + 0 x¹ + 1 x² + 0 x³ becomes 1.
   pub fn simplify(&mut self) {
     while let Some(coefficient) = self.first() {
-      // If it isn't 0 we shoudn't remove it.
+      // If it isn't 0 we shouldn't remove it.
       if !crate::math::is_zero(*coefficient) {
         break;
       }
