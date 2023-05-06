@@ -7,22 +7,22 @@ impl Polynomial {
   pub fn new(
     coefficients: std::collections::LinkedList<f32>,
   ) -> Polynomial {
-    return Polynomial { coefficients };
+    Polynomial { coefficients }
   }
 
   /// Remove the leading zeros of the polynomial, both from
   /// the right and the left.
   /// For example: 0 + 0 x¹ + 1 x² + 0 x³ becomes 1.
   pub fn simplify(&mut self) {
-    while let Some(coefficient) = self.first() {
+    while let Some(&coefficient) = self.first() {
       // If it isn't 0 we shouldn't remove it.
-      if !crate::math::is_zero(*coefficient) {
+      if !crate::math::is_zero(coefficient) {
         break;
       }
       self.coefficients.pop_front();
     }
-    while let Some(coefficient) = self.last() {
-      if !crate::math::is_zero(*coefficient) {
+    while let Some(&coefficient) = self.last() {
+      if !crate::math::is_zero(coefficient) {
         break;
       }
       self.coefficients.pop_back();
@@ -31,31 +31,31 @@ impl Polynomial {
 
   /// Evaluate p(x).
   pub fn get_value_at(&self, x: f32) -> f32 {
-    let mut result: f32 = 0.0;
-    let mut x_pow: f32 = 1.0;
+    let mut result = 0.0;
+    let mut x_pow = 1.0;
 
     for coefficient in &self.coefficients {
       result += coefficient * x_pow;
       x_pow *= x;
     }
 
-    return result;
+    result
   }
 
-  // Expose functions of self.linked_list.
+  // Expose functions of self.coefficients.
   pub fn len(&self) -> usize {
-    return self.coefficients.len();
+    self.coefficients.len()
   }
   pub fn iter(
     &self,
-  ) -> std::collections::linked_list::Iter<'_, f32> {
-    return self.coefficients.iter();
+  ) -> std::collections::linked_list::Iter<f32> {
+    self.coefficients.iter()
   }
   pub fn first(&self) -> Option<&f32> {
-    return self.coefficients.front();
+    self.coefficients.front()
   }
   pub fn last(&self) -> Option<&f32> {
-    return self.coefficients.back();
+    self.coefficients.back()
   }
 }
 
@@ -63,14 +63,13 @@ impl Polynomial {
 mod tests {
   #[test]
   fn create_polynomial() {
-    let linked_list =
-      std::collections::LinkedList::<f32>::new();
+    let coefficients = std::collections::LinkedList::new();
 
     let polynomial_1 = crate::polynomials::Polynomial {
-      coefficients: linked_list.clone(),
+      coefficients: coefficients.clone(),
     };
     let polynomial_2 = crate::polynomials::Polynomial::new(
-      linked_list.clone(),
+      coefficients.clone(),
     );
 
     assert_eq!(
@@ -81,14 +80,13 @@ mod tests {
 
   #[test]
   fn evaluate_polynomial() {
-    let linked_list =
+    let coefficients =
       // c = 1, b = 2, a = -3
       // a x² + b x + c
       std::collections::LinkedList::from([1.0, 2.0, -3.0]);
 
-    let polynomial = crate::polynomials::Polynomial {
-      coefficients: linked_list,
-    };
+    let polynomial =
+      crate::polynomials::Polynomial { coefficients };
 
     assert!(crate::math::is_zero(
       //    p(x) - y = 0
@@ -96,6 +94,6 @@ mod tests {
       // We check if this is 0 instead of checking if both
       // are equal because of floating point errors.
       polynomial.get_value_at(-1.0) + 4.0
-    ))
+    ));
   }
 }

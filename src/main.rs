@@ -46,10 +46,9 @@ fn main() {
   //   => x¹ (cₙ xⁿ⁻¹ + ··· + c₁ x⁰) = -c₀
   //   => 0 = -c₀
   //   => c₀ = 0
-  let has_zero = match polynomial.first() {
-    Some(first) => math::is_zero(*first),
-    None => false,
-  };
+  let has_zero = polynomial
+    .first()
+    .map_or(false, |&first| math::is_zero(first));
 
   polynomial.simplify();
 

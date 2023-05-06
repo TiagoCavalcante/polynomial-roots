@@ -20,7 +20,8 @@ fn false_position(
 ) -> f32 {
   let fa = polynomial.get_value_at(a);
   let fb = polynomial.get_value_at(b);
-  return (a * fb - b * fa) / (fb - fa);
+
+  (a * fb - b * fa) / (fb - fa)
 }
 
 /// Get a root in the interval [a, b] using the false
@@ -46,7 +47,7 @@ fn get_root(
     x = false_position(polynomial, a, b);
   }
 
-  return x;
+  x
 }
 
 /// Gets all the roots in the interval [a, b].
@@ -92,7 +93,7 @@ pub fn get_roots(
   polynomial: &crate::polynomials::Polynomial,
   has_zero: bool,
 ) -> Vec<f32> {
-  let mut roots = Vec::<f32>::new();
+  let mut roots = vec![];
 
   if let Some(upper_bound) = couchy::bound(polynomial) {
     // Negatives first so it is ordered.
@@ -124,5 +125,5 @@ pub fn get_roots(
     }
   }
 
-  return roots;
+  roots
 }

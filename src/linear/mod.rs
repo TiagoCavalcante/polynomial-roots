@@ -14,15 +14,15 @@ pub fn get_roots(
     if has_zero {
       // Ensure the roots are ordered.
       if root > 0.0 {
-        return vec![0.0, root];
+        vec![0.0, root]
       } else {
-        return vec![root, 0.0];
+        vec![root, 0.0]
       }
     } else {
-      return vec![root];
+      vec![root]
     }
   } else {
-    return vec![];
+    vec![]
   }
 }
 

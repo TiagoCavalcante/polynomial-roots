@@ -4,7 +4,8 @@
 pub fn variations(
   polynomial: &crate::polynomials::Polynomial,
 ) -> i32 {
-  let mut v: i32 = 0;
+  let mut v = 0;
+
   if let Some(mut old) = polynomial.first() {
     polynomial
       .iter()
@@ -15,8 +16,8 @@ pub fn variations(
       // still counts as a change in sign (+a, 0, -a), so we
       // shouldn't assign to old  when the coefficient is 0,
       // so none of the code bellow should be executed.
-      .filter(|coefficient| {
-        !crate::math::is_zero(**coefficient)
+      .filter(|&&coefficient| {
+        !crate::math::is_zero(coefficient)
       })
       .for_each(|coefficient| {
         if (*coefficient < 0.0 && *old > 0.0)
@@ -27,7 +28,8 @@ pub fn variations(
         old = coefficient;
       });
   }
-  return v;
+
+  v
 }
 
 /// Variations of signs of the polynomial p(-x), it is the
@@ -36,7 +38,7 @@ pub fn variations(
 pub fn negative_variations(
   polynomial: &crate::polynomials::Polynomial,
 ) -> i32 {
-  let mut v: i32 = 0;
+  let mut v = 0;
   if let Some(first) = polynomial.first() {
     // The first coefficient doesn't not multiplies an x
     // power, and so should be negated, otherwise we should
@@ -46,10 +48,10 @@ pub fn negative_variations(
     polynomial
       .iter()
       .skip(1)
-      .filter(|coefficient| {
-        !crate::math::is_zero(**coefficient)
+      .filter(|&&coefficient| {
+        !crate::math::is_zero(coefficient)
       })
-      .for_each(|coefficient| {
+      .for_each(|&coefficient| {
         // If i is odd.
         // (-k)^n, where k is a positive number is -k, so
         // instead of checking if the signs are opposite we
@@ -64,7 +66,8 @@ pub fn negative_variations(
         old = *coefficient;
       });
   }
-  return v;
+
+  v
 }
 
 /// Returns the biggest (in terms of modulo) non-last
@@ -94,12 +97,8 @@ fn biggest_non_last_coefficient(
 pub fn bound(
   polynomial: &crate::polynomials::Polynomial,
 ) -> Option<f32> {
-  match polynomial.last() {
-    Some(last) => Some(
-      (1.0
-        + biggest_non_last_coefficient(polynomial) / last)
-        .abs(),
-    ),
-    None => None,
-  }
+  polynomial.last().map(|last| {
+    (1.0 + biggest_non_last_coefficient(polynomial) / last)
+      .abs()
+  })
 }
