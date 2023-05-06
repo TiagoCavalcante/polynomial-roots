@@ -20,11 +20,9 @@ pub fn variations(
         !crate::math::is_zero(coefficient)
       })
       .for_each(|coefficient| {
-        if (*coefficient < 0.0 && *old > 0.0)
-          || (*coefficient > 0.0 && *old < 0.0)
-        {
-          v += 1;
-        }
+        // If coefficient and old have opposite signs then
+        // coefficient * old < 0.0.
+        v += (coefficient * old < 0.0) as i32;
         old = coefficient;
       });
   }
@@ -58,12 +56,10 @@ pub fn negative_variations(
         // are going to check if the signs are the same as
         // either the sign of the current coefficient is
         // negated or the sign of old is negated.
-        if (*coefficient < 0.0 && old < 0.0)
-          || (*coefficient > 0.0 && old > 0.0)
-        {
-          v += 1;
-        }
-        old = *coefficient;
+        // If coefficient and old have the same sign then
+        // coefficient * old > 0.0.
+        v += (coefficient * old > 0.0) as i32;
+        old = coefficient;
       });
   }
 

@@ -1,15 +1,5 @@
 mod couchy;
 
-/// Returns -1 if x < 0, 1 if x > 0, 0 otherwise.
-#[inline]
-fn sign(x: f32) -> i32 {
-  match x {
-    _ if x < 0.0 => -1,
-    _ if x > 0.0 => 1,
-    _ => 0,
-  }
-}
-
 /// Get x₀ in false position method.
 /// x₀ = [a f(b) - b f(a)] / [f(a) - f(b)]
 /// This is also know as regula falsi method.
@@ -68,8 +58,9 @@ fn get_roots_in_interval(
 
     // If one value is bellow the y=0 line and the other
     // value is over it, certainly it crossed the y=0 line.
-    if sign(polynomial.get_value_at(old))
-      != sign(polynomial.get_value_at(current))
+    if polynomial.get_value_at(old)
+      * polynomial.get_value_at(current)
+      < 0.0
     {
       let x = get_root(polynomial, old, current);
 
