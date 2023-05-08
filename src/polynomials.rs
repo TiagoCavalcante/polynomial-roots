@@ -31,15 +31,13 @@ impl Polynomial {
 
   /// Evaluate p(x).
   pub fn get_value_at(&self, x: f32) -> f32 {
-    let mut result = 0.0;
-    let mut x_pow = 1.0;
-
-    for coefficient in &self.coefficients {
-      result += coefficient * x_pow;
-      x_pow *= x;
-    }
-
-    result
+    self
+      .coefficients
+      .iter()
+      .fold((0.0, 1.0), |acc, e| {
+        (acc.0 + e * acc.1, acc.1 * x)
+      })
+      .1
   }
 
   // Expose functions of self.coefficients.
