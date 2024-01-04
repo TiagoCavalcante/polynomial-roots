@@ -1,11 +1,8 @@
 //! Blazingly fast polynomial root finder
 
-mod constants;
-mod false_position;
-mod linear;
-mod math;
-mod polynomials;
-mod quadratic;
+use polynomial_roots::{
+  false_position, linear, math, polynomials, quadratic,
+};
 
 /// Get the coefficients of the polynomial in exponent
 /// increasing order and print the roots of the polynomial,

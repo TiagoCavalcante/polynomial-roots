@@ -4,7 +4,7 @@ pub struct Polynomial {
 
 impl Polynomial {
   /// Create a new polynomial.
-  pub fn new(
+  pub const fn new(
     coefficients: std::collections::LinkedList<f32>,
   ) -> Polynomial {
     Polynomial { coefficients }

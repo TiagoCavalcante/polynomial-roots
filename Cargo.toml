@@ -5,3 +5,11 @@ edition = "2021"
 license = "MIT"
 description = "Find the real roots of huge polynomials in milliseconds"
 repository = "https://github.com/TiagoCavalcante/polynomial-roots"
+
+[lib]
+path = "src/lib.rs"
+name = "polynomial_roots"
+
+[[bin]]
+path = "src/bin.rs"
+name = "polynomial-roots"
