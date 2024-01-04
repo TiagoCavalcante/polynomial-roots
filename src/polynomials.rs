@@ -67,7 +67,7 @@ mod tests {
       coefficients: coefficients.clone(),
     };
     let polynomial_2 = crate::polynomials::Polynomial::new(
-      coefficients.clone(),
+      coefficients,
     );
 
     assert_eq!(

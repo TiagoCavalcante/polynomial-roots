@@ -45,12 +45,10 @@ pub fn get_roots(
       } else {
         vec![root1, root2]
       }
+    } else if has_zero {
+      vec![0.0]
     } else {
-      if has_zero {
-        vec![0.0]
-      } else {
-        vec![]
-      }
+      vec![]
     }
   } else {
     vec![]

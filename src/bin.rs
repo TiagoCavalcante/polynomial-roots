@@ -62,5 +62,5 @@ fn main() {
   for root in &roots {
     print!("{root}; ");
   }
-  print!("}}\n");
+  println!("}}");
 }
